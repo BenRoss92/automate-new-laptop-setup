@@ -10,7 +10,9 @@ jobs:
       # WORKS: Try to run the bash script inside of the runner
       # - name: Run bash script
       #   run: ./set-up-laptop.sh
-      # Check if Homebrew is already installed inside the runner:
-      - name: Check if Homebrew comes pre-installed on GitHub Actions MacOS Virtual Machine
-        run: brew help
-
+      # CONFIRMED: Homebrew is already installed inside the runner:
+      # - name: Check if Homebrew comes pre-installed on GitHub Actions MacOS Virtual Machine
+      #   run: brew help
+      # Uninstall Homebrew (pre-installed on GitHub Actions MacOS Virtual Machine):
+      - name: Uninstall pre-installed Homebrew version
+        run: NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/uninstall.sh)"
