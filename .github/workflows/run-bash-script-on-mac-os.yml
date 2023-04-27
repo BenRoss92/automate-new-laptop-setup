@@ -4,4 +4,9 @@ jobs:
   Run-Script:
     runs-on: macos-12
     steps:
-      - run: echo "Testing that empty workflow is able to be run"
+    # Try to run your bash script in the macos-12 environment
+      # Clone your repository code (including the bash script) onto the runner
+      - uses: actions/checkout@v3
+      # Try to run the bash script inside of the runner
+      - name: Run bash script
+        run: ./set-up-laptop.sh
