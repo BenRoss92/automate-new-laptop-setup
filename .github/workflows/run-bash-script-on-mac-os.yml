@@ -5,8 +5,12 @@ jobs:
     runs-on: macos-12
     steps:
     # Try to run your bash script in the macos-12 environment
-      # Clone your repository code (including the bash script) onto the runner
-      - uses: actions/checkout@v3
-      # Try to run the bash script inside of the runner
-      - name: Run bash script
-        run: ./set-up-laptop.sh
+      # WORKS: Clone your repository code (including the bash script) onto the runner
+      # - uses: actions/checkout@v3
+      # WORKS: Try to run the bash script inside of the runner
+      # - name: Run bash script
+      #   run: ./set-up-laptop.sh
+      # Check if Homebrew is already installed inside the runner:
+      - name: Check if Homebrew comes pre-installed on GitHub Actions MacOS Virtual Machine
+        run: brew help
+
