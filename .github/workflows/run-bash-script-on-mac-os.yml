@@ -22,8 +22,26 @@ jobs:
           curl -sLO https://raw.githubusercontent.com/Homebrew/install/HEAD/uninstall.sh
           chmod +x ./uninstall.sh
           sudo ./uninstall.sh --force
-      - name: Remove remaining pre-installed Homebrew directories
+      - name: Remove remaining pre-installed Homebrew directories that weren't removed
+        # We were told these files possibly related to Homebrew haven't been deleted, so we should remove them:
         run: |
-          sudo rm -rf /usr/local/Homebrew
+          sudo rm -rf /usr/local/.com.apple.installer.keep
+          sudo rm -rf /usr/local/Frameworks/
+          sudo rm -rf /usr/local/Homebrew/
+          sudo rm -rf /usr/local/aws-cli/
+          sudo rm -rf /usr/local/bin/
+          sudo rm -rf /usr/local/etc/
+          sudo rm -rf /usr/local/include/
+          sudo rm -rf /usr/local/lib/
+          sudo rm -rf /usr/local/microsoft/
+          sudo rm -rf /usr/local/miniconda/
+          sudo rm -rf /usr/local/opt/
+          sudo rm -rf /usr/local/sbin/
+          sudo rm -rf /usr/local/sessionmanagerplugin/
+          sudo rm -rf /usr/local/share/
+          sudo rm -rf /usr/local/var/
+      - name: Ensure reportedly deleted pre-installed Homebrew directories no longer exist
+        # We were told these would be deleted, but good to ensure that they are definitely deleted:
+        run: |
           sudo rm -rf /usr/local/Caskroom
           sudo rm -rf /usr/local/bin/brew
