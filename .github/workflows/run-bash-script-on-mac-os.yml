@@ -45,6 +45,9 @@ jobs:
         run: |
           sudo rm -rf /usr/local/Caskroom
           sudo rm -rf /usr/local/bin/brew
+      - name: Check pre-installed Homebrew version has been removed
+        # Check output to see whether this looks successful or not
+        run: brew help
       - name: Install a fresh version of Homebrew
         # Taken from Homebrew docs: 
         # https://github.com/Homebrew/install/#install-homebrew-on-macos-or-linux:~:text=If%20you%20want%20to%20run%20the%20Homebrew%20installer%20non%2Dinteractively%20without%20prompting%20for%20passwords%20(e.g.%20in%20automation%20scripts)%2C%20you%20can%20use
