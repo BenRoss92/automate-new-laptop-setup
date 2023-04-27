@@ -1,0 +1,7 @@
+name: Run Bash Script on Mac OS
+on: [push]
+jobs:
+  Run-Script:
+    runs-on: macos-12
+    steps:
+      - run: echo "Testing that empty workflow is able to be run"
