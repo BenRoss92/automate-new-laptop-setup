@@ -5,11 +5,6 @@ jobs:
     runs-on: macos-12
     steps:
     ## Try to run your bash script in the macos-12 environment
-      ## WORKS: Clone your repository code (including the bash script) onto the runner
-      # - uses: actions/checkout@v3
-      ## WORKS: Try to run the bash script inside of the runner
-      # - name: Run bash script
-      #   run: ./set-up-laptop.sh
       ## CONFIRMED: Homebrew is already installed inside the runner:
       # - name: Check if Homebrew comes pre-installed on GitHub Actions MacOS Virtual Machine
       #   run: brew help
@@ -56,9 +51,8 @@ jobs:
             then echo 'Homebrew is still installed but it should have been removed. Uninstall Homebrew before installing fresh version of Homebrew.'
             exit 1
           fi
-      - name: Install a fresh version of Homebrew
-        # Taken from Homebrew docs: 
-        # https://github.com/Homebrew/install/#install-homebrew-on-macos-or-linux:~:text=If%20you%20want%20to%20run%20the%20Homebrew%20installer%20non%2Dinteractively%20without%20prompting%20for%20passwords%20(e.g.%20in%20automation%20scripts)%2C%20you%20can%20use
-        run: NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-      - name: Check fresh Homebrew version is installed in the MacOS Virtual Machine's PATH
-        run: brew help
+      # WORKS: Clone your repository code (including the bash script) onto the runner
+      - uses: actions/checkout@v3
+      # WORKS: Try to run the bash script inside of the runner
+      - name: Run bash script
+        run: ./set-up-laptop.sh
