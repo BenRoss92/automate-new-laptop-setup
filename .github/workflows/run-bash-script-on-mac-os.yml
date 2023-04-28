@@ -4,21 +4,18 @@ jobs:
   Run-Script:
     runs-on: macos-12
     steps:
-    ## Try to run your bash script in the macos-12 environment
-      ## CONFIRMED: Homebrew is already installed inside the runner:
-      # - name: Check if Homebrew comes pre-installed on GitHub Actions MacOS Virtual Machine
-      #   run: brew help
-      ## Uninstall Homebrew (pre-installed on GitHub Actions MacOS Virtual Machine):
-      ## - Doesn't fail, but doesn't remove everything it should due to not having sudo permissions
-      # - name: Uninstall pre-installed Homebrew version
-        # run: NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/uninstall.sh)"
+        # Homebrew is pre-installed on the GitHub Actions MacOS Runner (Virtual Machine) - see: https://github.com/actions/runner-images/blob/main/images/macos/macos-12-Readme.md#:~:text=Composer%202.5.5-,Homebrew%204.0.15,-Miniconda%2023.3.1
+        # So we need to remove it
+        # Uninstalling Homebrew using the following command recommended in the docs doesn't fail, but doesn't remove everything it should do due to not having sudo permissions:
+        # NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/uninstall.sh)"
+        # So we need to use sudo to run it
       - name: Uninstall pre-installed Homebrew version
         run: |
           curl -sLO https://raw.githubusercontent.com/Homebrew/install/HEAD/uninstall.sh
           chmod +x ./uninstall.sh
           sudo ./uninstall.sh --force
       - name: Remove remaining pre-installed Homebrew directories that weren't removed
-        # We were told these files possibly related to Homebrew haven't been deleted, so we should remove them:
+        # The Homebrew output tells us that these files possibly related to Homebrew on the GitHub Actions MacOS Runner haven't been deleted, so we should remove them:
         run: |
           sudo rm -rf /usr/local/.com.apple.installer.keep
           sudo rm -rf /usr/local/Frameworks/
@@ -36,23 +33,16 @@ jobs:
           sudo rm -rf /usr/local/share/
           sudo rm -rf /usr/local/var/
       - name: Ensure reportedly deleted pre-installed Homebrew directories no longer exist
-        # We were told these would be deleted, but good to ensure that they are definitely deleted:
+        # The Homebrew output tells us that these should have been deleted, but doesn't hurt to ensure that they are definitely deleted:
         run: |
           sudo rm -rf /usr/local/Caskroom
           sudo rm -rf /usr/local/bin/brew
-      # CONFIRMED: Fails correctly as Homebrew at this point had been correctly uninstalled and was no longer available
-      # - name: Check pre-installed Homebrew version has been removed
-        # Check output to see whether this looks successful or not
-        # run: brew help
-      # CONFIRMED: Fails correctly if Homebrew exists (which it shouldn't at this point)
       - name: Ensure pre-installed Homebrew version has been removed
         run: |
           if command -v brew &> /dev/null
-            then echo 'Homebrew is still installed but it should have been removed. Uninstall Homebrew before installing fresh version of Homebrew.'
+            then echo 'Homebrew is still installed but it should have been removed. Uninstall Homebrew to ensure that the bash script does not try to install Homebrew for a second time.'
             exit 1
           fi
-      # WORKS: Clone your repository code (including the bash script) onto the runner
       - uses: actions/checkout@v3
-      # WORKS: Try to run the bash script inside of the runner
       - name: Run bash script
         run: ./set-up-laptop.sh
