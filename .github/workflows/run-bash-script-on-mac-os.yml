@@ -49,15 +49,26 @@ jobs:
       # - name: Check if Xcode Command Line Tools are installed
       #   run: xcode-select -p
       # # Failed: --remove isn't a valid flag
+      # # See: https://github.com/BenRoss92/automate-new-laptop-setup/actions/runs/5078886532/jobs/9123951223#step:7:1
       # - name: Remove Xcode Command Line Tools
       #   run: xcode-select --remove
       # # Didn't get this far:
       # - name: Re-check if Xcode Command Line Tools are installed
       #   run: xcode-select -p
+      # - name: Check if Xcode Command Line Tools are installed
+      #   run: xcode-select -p
+      # - name: Remove Xcode Command Line Tools
+      #   run: sudo rm -rf /Applications/Xcode_14.2.app
+      #   # Re-check is still passing but should be failing - is printing: /Applications/Xcode_14.2.app/Contents/Developer - but should be failing
+      #   # See https://github.com/BenRoss92/automate-new-laptop-setup/actions/runs/5079110397/jobs/9124445320
+      # - name: Re-check if Xcode Command Line Tools are installed
+      #   run: xcode-select -p
+
       - name: Check if Xcode Command Line Tools are installed
         run: xcode-select -p
       - name: Remove Xcode Command Line Tools
-        run: sudo rm -rf /Applications/Xcode_14.2.app
+      # Add trailing '/' to see if that stops xcode-select -p from printing out anything
+        run: sudo rm -rf /Applications/Xcode_14.2.app/
       - name: Re-check if Xcode Command Line Tools are installed
         run: xcode-select -p
       - uses: actions/checkout@v3
