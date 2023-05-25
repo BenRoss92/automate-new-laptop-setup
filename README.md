@@ -23,6 +23,10 @@ Requirements:
 
 In iTerm, set a mark by pressing: CMD + ALT + A
 
+An icon of an eye should then appear in the top-right hand corner of the iTerm window:
+
+![iTerm mark](/docs-images/Screenshot%202023-05-25%20at%2011.37.12.png)
+
 Then run:
 
 ```bash
