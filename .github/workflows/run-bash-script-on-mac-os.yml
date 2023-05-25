@@ -38,6 +38,8 @@ jobs:
           sudo rm -rf /usr/local/Caskroom
           sudo rm -rf /usr/local/bin/brew
       - name: Ensure pre-installed Homebrew version has been removed
+        # Check if Homebrew is installed using `command -v brew`. If Homebrew is not already installed, this command will not print anything to standard error or standard output.
+        # If Homebrew is already installed (if anything is printed to standard error or standard output), print a message stating that the GitHub Workflow needs to be changed to ensure that Homebrew is not already installed on the macOS virtual machine, and fail the GitHub Workflow.
         run: |
           if command -v brew &> /dev/null
             then echo 'Homebrew is still installed but it should have been removed. Uninstall Homebrew to ensure that the bash script does not try to install Homebrew for a second time.'
