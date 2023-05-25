@@ -8,8 +8,14 @@ jobs:
         run: mdfind -name "xcode"
       - name: Remove Xcode
         run: sudo rm -rf /Applications/Xcode_14.2.app/
+      - name: See if Xcode is installed inside '~/' directory
+        run: ls -la ~/Library/Developer/
       - name: Remove Xcode's residual files
         run: sudo rm -rf ~/Library/Developer/
+      - name: See if Xcode is installed in '/' directory
+        run: ls -la /Library/Developer/
+      - name: Delete Xcode in '/' directory
+        run: sudo rm -rf /Library/Developer/
       - name: Remove other Xcode support files in the Library cache folder
         run: sudo rm -rf ~/Library/Caches/com.apple.dt.Xcode
       - name: Find any remainig files relating to Xcode
