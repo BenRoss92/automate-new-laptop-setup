@@ -4,14 +4,28 @@ jobs:
   Run-Script:
     runs-on: macos-12
     steps:
-      - name: See if Xcode Command Line Tools is installed where expected
-        run: ls -la /Library/Developer/CommandLineTools
-      - name: Try to get rid of just the Xcode Command Line Tools only
-        run: sudo rm -rf /Library/Developer/CommandLineTools
-      - name: Reset the default command-line tools
-        run: sudo xcode-select -r
-      - name: Check if Xcode Command Line Tools is still installed
+      - name: Find all files relating to Xcode
+        run: mdfind -name "xcode"
+      - name: Remove Xcode
+        run: sudo rm -rf /Applications/Xcode_14.2.app/
+      - name: Remove Xcode's residual files
+        run: sudo rm -rf ~/Library/Developer/
+      - name: Remove other Xcode support files in the Library cache folder
+        run: sudo rm -rf ~/Library/Caches/com.apple.dt.Xcode
+      - name: Find any remainig files relating to Xcode
+        run: mdfind -name "xcode"
+      - name: Check whether Xcode is still installed
         run: xcode-select -p
+
+      # - name: See if Xcode Command Line Tools is installed where expected
+      #   run: ls -la /Library/Developer/CommandLineTools
+      # - name: Try to get rid of just the Xcode Command Line Tools only
+      #   run: sudo rm -rf /Library/Developer/CommandLineTools
+      # - name: Reset the default command-line tools
+      #   run: sudo xcode-select -r
+      # - name: Check if Xcode Command Line Tools is still installed
+      #   run: xcode-select -p
+
 
       # Might have to do this as well - see if you need it: You also need to reset the default command-line tools by entering this command "sudo xcode-select -r"
 
