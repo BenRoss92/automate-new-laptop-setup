@@ -45,10 +45,19 @@ jobs:
             then echo 'Homebrew is still installed but it should have been removed. Uninstall Homebrew to ensure that the bash script does not try to install Homebrew for a second time.'
             exit 1
           fi
+      # # They do exist - it prints out: /Applications/Xcode_14.2.app/Contents/Developer
+      # - name: Check if Xcode Command Line Tools are installed
+      #   run: xcode-select -p
+      # # Failed: --remove isn't a valid flag
+      # - name: Remove Xcode Command Line Tools
+      #   run: xcode-select --remove
+      # # Didn't get this far:
+      # - name: Re-check if Xcode Command Line Tools are installed
+      #   run: xcode-select -p
       - name: Check if Xcode Command Line Tools are installed
         run: xcode-select -p
       - name: Remove Xcode Command Line Tools
-        run: xcode-select --remove
+        run: sudo rm -rf /Applications/Xcode_14.2.app
       - name: Re-check if Xcode Command Line Tools are installed
         run: xcode-select -p
       - uses: actions/checkout@v3
