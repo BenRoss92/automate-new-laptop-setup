@@ -67,8 +67,9 @@ jobs:
       - name: Check if Xcode Command Line Tools are installed
         run: xcode-select -p
       - name: Remove Xcode Command Line Tools
-      # Add trailing '/' to see if that stops xcode-select -p from printing out anything
-        run: sudo rm -rf /Applications/Xcode_14.2.app/
+        run: sudo rm -rf /Applications/Xcode_14.2.app
+      - name: See if /Applications/Xcode_14.2.app still exists
+        run: ls -la /Applications/Xcode_14.2.app
       - name: Re-check if Xcode Command Line Tools are installed
         run: xcode-select -p
       - uses: actions/checkout@v3
