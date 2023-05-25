@@ -45,6 +45,12 @@ jobs:
             then echo 'Homebrew is still installed but it should have been removed. Uninstall Homebrew to ensure that the bash script does not try to install Homebrew for a second time.'
             exit 1
           fi
+      - name: Check if Xcode Command Line Tools are installed
+        run: xcode-select -p
+      - name: Remove Xcode Command Line Tools
+        run: xcode-select --remove
+      - name: Re-check if Xcode Command Line Tools are installed
+        run: xcode-select -p
       - uses: actions/checkout@v3
       - name: Run bash script
         run: ./set-up-laptop.sh
