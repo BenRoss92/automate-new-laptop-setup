@@ -5,10 +5,10 @@ jobs:
     runs-on: macos-12
     steps:
         # Homebrew is pre-installed on the GitHub Actions MacOS Runner (Virtual Machine) - see: https://github.com/actions/runner-images/blob/main/images/macos/macos-12-Readme.md#:~:text=Composer%202.5.5-,Homebrew%204.0.15,-Miniconda%2023.3.1
-        # So we need to remove it
+        # - So we need to remove it
         # Uninstalling Homebrew using the following command recommended in the docs doesn't fail, but doesn't remove everything it should do due to not having sudo permissions:
         # NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/uninstall.sh)"
-        # So we need to use sudo to run it
+        # - So we need to use sudo to run it
       - name: Uninstall pre-installed Homebrew version
         run: |
           curl -sLO https://raw.githubusercontent.com/Homebrew/install/HEAD/uninstall.sh
@@ -33,7 +33,7 @@ jobs:
           sudo rm -rf /usr/local/share/
           sudo rm -rf /usr/local/var/
       - name: Ensure reportedly deleted pre-installed Homebrew directories no longer exist
-        # The Homebrew output tells us that these should have been deleted, but doesn't hurt to ensure that they are definitely deleted:
+        # The Homebrew output tells us that these should have been deleted, but we should make sure that they are definitely removed:
         run: |
           sudo rm -rf /usr/local/Caskroom
           sudo rm -rf /usr/local/bin/brew
