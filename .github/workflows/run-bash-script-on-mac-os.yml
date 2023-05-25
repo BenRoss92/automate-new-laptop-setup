@@ -8,6 +8,8 @@ jobs:
         run: ls -la /Library/Developer/CommandLineTools
       - name: Try to get rid of just the Xcode Command Line Tools only
         run: sudo rm -rf /Library/Developer/CommandLineTools
+      - name: Reset the default command-line tools
+        run: sudo xcode-select -r
       - name: Check if Xcode Command Line Tools is still installed
         run: xcode-select -p
 
