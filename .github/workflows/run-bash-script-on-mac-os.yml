@@ -14,8 +14,13 @@ jobs:
         run: sudo rm -rf ~/Library/Caches/com.apple.dt.Xcode
       - name: Find any remainig files relating to Xcode
         run: mdfind -name "xcode"
+      - name: Reset the default command-line tools
+        run: sudo xcode-select -r
       - name: Check whether Xcode is still installed
         run: xcode-select -p
+      - name: Print the version of Xcode being used
+        run: xcode-select -v
+      
 
       # - name: See if Xcode Command Line Tools is installed where expected
       #   run: ls -la /Library/Developer/CommandLineTools
