@@ -6,6 +6,12 @@ jobs:
     steps:
       - name: See if Xcode Command Line Tools is installed where expected
         run: ls -la /Library/Developer/CommandLineTools
+      - name: Try to get rid of just the Xcode Command Line Tools only
+        run: sudo rm -rf /Library/Developer/CommandLineTools
+      - name: Check if Xcode Command Line Tools is still installed
+        run: xcode-select -p
+
+      # Might have to do this as well - see if you need it: You also need to reset the default command-line tools by entering this command "sudo xcode-select -r"
 
       #   # Homebrew is pre-installed on the GitHub Actions MacOS Runner (Virtual Machine) - see: https://github.com/actions/runner-images/blob/main/images/macos/macos-12-Readme.md#:~:text=Composer%202.5.5-,Homebrew%204.0.15,-Miniconda%2023.3.1
       #   # - So we need to remove it
