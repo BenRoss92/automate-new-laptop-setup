@@ -49,7 +49,7 @@ jobs:
         run: sudo rm -rf /Applications/Xcode_14.2.app/
       - name: Delete Xcode in '/' directory
         run: sudo rm -rf /Library/Developer/
-      # Not needed to remove Xcode, will leave here for now in case is needed
+      # Not needed to remove Xcode, will leave in for now in case Xcode misbehaves on GitHub's macOS Virtual Machine. If not, can safely remove:
       # - name: Remove other Xcode support files in the Library cache folder
       #   run: sudo rm -rf ~/Library/Caches/com.apple.dt.Xcode
       - name: Reset the default command-line tools
