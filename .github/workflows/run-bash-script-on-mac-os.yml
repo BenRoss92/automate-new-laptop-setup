@@ -9,12 +9,8 @@ jobs:
       # Confirmed: Need the following line:
       - name: Delete Xcode in '/' directory
         run: sudo rm -rf /Library/Developer/
-      - name: See if com.apple.dt.Xcode is in ~/Library/Caches/
-        run: ls -la ~/Library/Caches/
-      # - name: Remove other Xcode support files in the Library cache folder
-      #   run: sudo rm -rf ~/Library/Caches/com.apple.dt.Xcode
-      - name: Reset the default command-line tools
-        run: sudo xcode-select -r
+      # - name: Reset the default command-line tools
+      #   run: sudo xcode-select -r
       - name: Check whether Xcode is still installed
         run: xcode-select -p
 
