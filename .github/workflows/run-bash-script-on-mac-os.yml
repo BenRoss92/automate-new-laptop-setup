@@ -45,20 +45,15 @@ jobs:
             then echo 'Homebrew is still installed but it should have been removed. Uninstall Homebrew to ensure that the bash script does not try to install Homebrew for a second time.'
             exit 1
           fi
-      # Confirmed: Need the following line:
       - name: Remove Xcode
         run: sudo rm -rf /Applications/Xcode_14.2.app/
-      # Confirmed: Need the following line:
       - name: Delete Xcode in '/' directory
         run: sudo rm -rf /Library/Developer/
-      # Confirmed: Exists: ~/Library/Caches/com.apple.dt.Xcode
       # Not needed to remove Xcode, will leave here for now in case is needed
       # - name: Remove other Xcode support files in the Library cache folder
       #   run: sudo rm -rf ~/Library/Caches/com.apple.dt.Xcode
-      # Confirmed: Need the following line:
       - name: Reset the default command-line tools
         run: sudo xcode-select -r
-      # Confirmed: Need the following line:
       - name: Check that Xcode is not installed
         run: |
           if xcode-select -p ; then
