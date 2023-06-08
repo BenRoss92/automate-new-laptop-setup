@@ -13,9 +13,9 @@ jobs:
       #   run: sudo rm -rf ~/Library/Caches/com.apple.dt.Xcode
       - name: Reset the default command-line tools
         run: sudo xcode-select -r
-      - name: Check whether Xcode is still installed
+      - name: Check that Xcode is not installed
         run: |
-          if ! xcode-select -p ; then
+          if xcode-select -p ; then
             echo "Xcode is installed but it should have been removed. Uninstall Xcode to ensure that the bash script does not try to install Xcode for a second time."
             exit 1
           fi
