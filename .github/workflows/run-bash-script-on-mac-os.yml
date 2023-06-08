@@ -15,10 +15,9 @@ jobs:
         run: sudo xcode-select -r
       - name: Check whether Xcode is still installed
         run: |
-          if xcode-select -p ; then
-            echo "Xcode is installed"
-          else
-            echo "Xcode is not installed"
+          if ! xcode-select -p ; then
+            echo "Xcode is installed but it should have been removed. Uninstall Xcode to ensure that the bash script does not try to install Xcode for a second time."
+            exit 1
           fi
 
       # - name: See if Xcode Command Line Tools is installed where expected
