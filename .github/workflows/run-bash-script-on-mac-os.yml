@@ -45,6 +45,21 @@ jobs:
             then echo 'Homebrew is still installed but it should have been removed. Uninstall Homebrew to ensure that the bash script does not try to install Homebrew for a second time.'
             exit 1
           fi
+      - name: Remove Xcode
+        run: sudo rm -rf /Applications/Xcode_14.2.app/
+      - name: Delete Xcode in '/' directory
+        run: sudo rm -rf /Library/Developer/
+      # Not needed to remove Xcode, will leave in for now in case Xcode misbehaves on GitHub's macOS Virtual Machine. If not, can safely remove:
+      # - name: Remove other Xcode support files in the Library cache folder
+      #   run: sudo rm -rf ~/Library/Caches/com.apple.dt.Xcode
+      - name: Reset the default command-line tools
+        run: sudo xcode-select -r
+      - name: Check that Xcode is not installed
+        run: |
+          if xcode-select -p ; then
+            echo "Xcode is installed but it should have been removed. Uninstall Xcode to ensure that the bash script does not try to install Xcode for a second time."
+            exit 1
+          fi
       - uses: actions/checkout@v3
       - name: Run bash script
         run: ./set-up-laptop.sh
