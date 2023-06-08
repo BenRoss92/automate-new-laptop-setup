@@ -14,7 +14,12 @@ jobs:
       - name: Reset the default command-line tools
         run: sudo xcode-select -r
       - name: Check whether Xcode is still installed
-        run: xcode-select -p
+        run: |
+          if xcode-select -p ; then
+            echo "Xcode is installed"
+          else
+            echo "Xcode is not installed"
+          fi
 
       # - name: See if Xcode Command Line Tools is installed where expected
       #   run: ls -la /Library/Developer/CommandLineTools
