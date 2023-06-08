@@ -4,27 +4,18 @@ jobs:
   Run-Script:
     runs-on: macos-12
     steps:
-      - name: Find all files relating to Xcode
-        run: mdfind -name "xcode"
       - name: Remove Xcode
         run: sudo rm -rf /Applications/Xcode_14.2.app/
-      - name: See if Xcode is installed in '/' directory
-        run: ls -la /Library/Developer/
       - name: Delete Xcode in '/' directory
         run: sudo rm -rf /Library/Developer/
       - name: See if com.apple.dt.Xcode is in ~/Library/Caches/
         run: ls -la ~/Library/Caches/
       - name: Remove other Xcode support files in the Library cache folder
         run: sudo rm -rf ~/Library/Caches/com.apple.dt.Xcode
-      - name: Find any remainig files relating to Xcode
-        run: mdfind -name "xcode"
       - name: Reset the default command-line tools
         run: sudo xcode-select -r
       - name: Check whether Xcode is still installed
         run: xcode-select -p
-      - name: Print the version of Xcode being used
-        run: xcode-select -v
-      
 
       # - name: See if Xcode Command Line Tools is installed where expected
       #   run: ls -la /Library/Developer/CommandLineTools
