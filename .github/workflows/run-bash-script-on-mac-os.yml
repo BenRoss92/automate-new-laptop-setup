@@ -6,8 +6,9 @@ jobs:
     steps:
       - name: Remove Xcode
         run: sudo rm -rf /Applications/Xcode_14.2.app/
-      - name: Delete Xcode in '/' directory
-        run: sudo rm -rf /Library/Developer/
+      # Check if this line is needed to remove XCode
+      # - name: Delete Xcode in '/' directory
+      #   run: sudo rm -rf /Library/Developer/
       - name: See if com.apple.dt.Xcode is in ~/Library/Caches/
         run: ls -la ~/Library/Caches/
       - name: Remove other Xcode support files in the Library cache folder
