@@ -45,15 +45,20 @@ jobs:
             then echo 'Homebrew is still installed but it should have been removed. Uninstall Homebrew to ensure that the bash script does not try to install Homebrew for a second time.'
             exit 1
           fi
+      # Confirmed: Need the following line:
       - name: Remove Xcode
         run: sudo rm -rf /Applications/Xcode_14.2.app/
+      # Confirmed: Need the following line:
       - name: Delete Xcode in '/' directory
         run: sudo rm -rf /Library/Developer/
+      # Confirmed: Exists: ~/Library/Caches/com.apple.dt.Xcode
       # Not needed to remove Xcode, will leave here for now in case is needed
       # - name: Remove other Xcode support files in the Library cache folder
       #   run: sudo rm -rf ~/Library/Caches/com.apple.dt.Xcode
+      # Confirmed: Need the following line:
       - name: Reset the default command-line tools
         run: sudo xcode-select -r
+      # Confirmed: Need the following line:
       - name: Check that Xcode is not installed
         run: |
           if xcode-select -p ; then
@@ -63,45 +68,3 @@ jobs:
       - uses: actions/checkout@v3
       - name: Run bash script
         run: ./set-up-laptop.sh
-
-      # - name: See if Xcode Command Line Tools is installed where expected
-      #   run: ls -la /Library/Developer/CommandLineTools
-      # - name: Try to get rid of just the Xcode Command Line Tools only
-      #   run: sudo rm -rf /Library/Developer/CommandLineTools
-      # - name: Reset the default command-line tools
-      #   run: sudo xcode-select -r
-      # - name: Check if Xcode Command Line Tools is still installed
-      #   run: xcode-select -p
-
-
-      # Might have to do this as well - see if you need it: You also need to reset the default command-line tools by entering this command "sudo xcode-select -r"
-
-      # # # They do exist - it prints out: /Applications/Xcode_14.2.app/Contents/Developer
-      # # - name: Check if Xcode Command Line Tools are installed
-      # #   run: xcode-select -p
-      # # # Failed: --remove isn't a valid flag
-      # # # See: https://github.com/BenRoss92/automate-new-laptop-setup/actions/runs/5078886532/jobs/9123951223#step:7:1
-      # # - name: Remove Xcode Command Line Tools
-      # #   run: xcode-select --remove
-      # # # Didn't get this far:
-      # # - name: Re-check if Xcode Command Line Tools are installed
-      # #   run: xcode-select -p
-      # # - name: Check if Xcode Command Line Tools are installed
-      # #   run: xcode-select -p
-      # # - name: Remove Xcode Command Line Tools
-      # #   run: sudo rm -rf /Applications/Xcode_14.2.app
-      # #   # Re-check is still passing but should be failing - is printing: /Applications/Xcode_14.2.app/Contents/Developer - but should be failing
-      # #   # See https://github.com/BenRoss92/automate-new-laptop-setup/actions/runs/5079110397/jobs/9124445320
-      # # - name: Re-check if Xcode Command Line Tools are installed
-      # #   run: xcode-select -p
-
-      # - name: Check if Xcode Command Line Tools are installed
-      #   run: xcode-select -p
-      # - name: Remove Xcode Command Line Tools
-      #   run: sudo rm -rf /Applications/Xcode_14.2.app
-      # - name: See if /Applications/Xcode_14.2.app still exists
-      #   run: ls -la /Applications/Xcode_14.2.app
-      # - name: 
-      #   run: sudo xcode-select -r
-      # - name: Re-check if Xcode Command Line Tools are installed
-      #   run: xcode-select -p
