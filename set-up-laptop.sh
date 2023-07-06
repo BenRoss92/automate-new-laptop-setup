@@ -16,6 +16,3 @@ brew bundle
 brew list slack
 brew list microsoft-teams
 brew list microsoft-outlook
-
-# Check that this script will fail if a Homebrew package we're checking isn't installed
-brew list pandoc
