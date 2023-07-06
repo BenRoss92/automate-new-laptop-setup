@@ -8,3 +8,11 @@ brew help
 
 # Check Xcode Command Line Tools have been installed by Homebrew
 xcode-select -p
+
+# Install Homebrew packages specified in the Brewfile
+brew bundle
+
+# Check that those Homebrew packages are installed
+brew list slack
+brew list microsoft-teams
+brew list microsoft-outlook
