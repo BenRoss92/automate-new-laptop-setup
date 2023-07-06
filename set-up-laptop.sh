@@ -9,8 +9,8 @@ brew help
 # Check Xcode Command Line Tools have been installed by Homebrew
 xcode-select -p
 
-# Install Homebrew packages specified in the Brewfile
-brew bundle
+# Install Homebrew packages
+brew install --cask slack microsoft-teams microsoft-outlook
 
 # Check that those Homebrew packages are installed
 brew list slack
