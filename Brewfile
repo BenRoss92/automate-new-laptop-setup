@@ -1,4 +1,4 @@
-# For all 'brew install --cask ...' commands, specify a directory to install all Homebrew Casks to 
+# For all 'brew install --cask ...' commands, specify a directory to install all Homebrew Casks into
 cask_args appdir: "/Applications"
 
 # Install packages using 'brew install --cask ...'
