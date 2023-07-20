@@ -13,10 +13,21 @@ brew help
 # Check Xcode Command Line Tools have been installed by Homebrew
 xcode-select -p
 
-# Install Homebrew packages
-brew install --cask slack microsoft-teams microsoft-outlook
+# Install Git using Homebrew
+echo "Checking where pre-installed version of Git is installed"
+which git
 
-# Check that those Homebrew packages are installed
-brew list slack
-brew list microsoft-teams
-brew list microsoft-outlook
+echo "Checking if a Homebrew Git version is already installed"
+brew list git
+
+echo "Checking which Homebrew Git versions have already been installed"
+brew ls --versions git
+
+echo "Installing Git using Homebrew"
+brew install git
+
+echo "Checking where new Homebrew Git version is installed"
+which git
+
+echo "Checking Git is working - checking version"
+git --version
