@@ -4,61 +4,64 @@ jobs:
   Run-Script:
     runs-on: macos-12
     steps:
-        # Homebrew is pre-installed on the GitHub Actions MacOS Runner (Virtual Machine) - see: https://github.com/actions/runner-images/blob/main/images/macos/macos-12-Readme.md#:~:text=Composer%202.5.5-,Homebrew%204.0.15,-Miniconda%2023.3.1
-        # - So we need to remove it
-        # Uninstalling Homebrew using the following command recommended in the docs doesn't fail, but doesn't remove everything it should do due to not having sudo permissions:
-        # NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/uninstall.sh)"
-        # - So we need to use sudo to run it
-      - name: Uninstall pre-installed Homebrew version
-        run: |
-          curl -sLO https://raw.githubusercontent.com/Homebrew/install/HEAD/uninstall.sh
-          chmod +x ./uninstall.sh
-          sudo ./uninstall.sh --force
-      - name: Remove remaining pre-installed Homebrew directories that weren't removed
-        # The Homebrew output tells us that these files possibly related to Homebrew on the GitHub Actions MacOS Runner haven't been deleted, so we should remove them:
-        run: |
-          sudo rm -rf /usr/local/.com.apple.installer.keep
-          sudo rm -rf /usr/local/Frameworks/
-          sudo rm -rf /usr/local/Homebrew/
-          sudo rm -rf /usr/local/aws-cli/
-          sudo rm -rf /usr/local/bin/
-          sudo rm -rf /usr/local/etc/
-          sudo rm -rf /usr/local/include/
-          sudo rm -rf /usr/local/lib/
-          sudo rm -rf /usr/local/microsoft/
-          sudo rm -rf /usr/local/miniconda/
-          sudo rm -rf /usr/local/opt/
-          sudo rm -rf /usr/local/sbin/
-          sudo rm -rf /usr/local/sessionmanagerplugin/
-          sudo rm -rf /usr/local/share/
-          sudo rm -rf /usr/local/var/
-      - name: Ensure reportedly deleted pre-installed Homebrew directories no longer exist
-        # The Homebrew output tells us that these should have been deleted, but we should make sure that they are definitely removed:
-        run: |
-          sudo rm -rf /usr/local/Caskroom
-          sudo rm -rf /usr/local/bin/brew
-      - name: Ensure pre-installed Homebrew version has been removed
-        # Check if Homebrew is installed using `command -v brew`. If Homebrew is not already installed, this command will not print anything to standard error or standard output.
-        # If Homebrew is already installed (if anything is printed to standard error or standard output), print a message stating that the GitHub Workflow needs to be changed to ensure that Homebrew is not already installed on the macOS virtual machine, and fail the GitHub Workflow.
-        run: |
-          if command -v brew &> /dev/null
-            then echo 'Homebrew is still installed but it should have been removed. Uninstall Homebrew to ensure that the bash script does not try to install Homebrew for a second time.'
-            exit 1
-          fi
-      - name: Remove Xcode
-        run: sudo rm -rf /Applications/Xcode_14.2.app/
-      - name: Delete Xcode in '/' directory
-        run: sudo rm -rf /Library/Developer/
-      # Not needed to remove Xcode, will leave in for now in case Xcode misbehaves on GitHub's macOS Virtual Machine. If not, can safely remove:
-      # - name: Remove other Xcode support files in the Library cache folder
-      #   run: sudo rm -rf ~/Library/Caches/com.apple.dt.Xcode
-      - name: Reset the default command-line tools
-        run: sudo xcode-select -r
-      - name: Check that Xcode is not installed
-        run: |
-          if xcode-select -p ; then
-            echo "Xcode is installed but it should have been removed. Uninstall Xcode to ensure that the bash script does not try to install Xcode for a second time."
-            exit 1
-          fi
-      - name: Download and run the current branch's version of the bash script
-        run: /bin/bash -c "$(curl https://raw.githubusercontent.com/BenRoss92/automate-new-laptop-setup/${{ github.ref_name }}/set-up-laptop.sh)"
+      - name: Check if Homebrew package 'hello' is installed (should fail the Workflow)
+        run: brew list hello
+
+      #   # Homebrew is pre-installed on the GitHub Actions MacOS Runner (Virtual Machine) - see: https://github.com/actions/runner-images/blob/main/images/macos/macos-12-Readme.md#:~:text=Composer%202.5.5-,Homebrew%204.0.15,-Miniconda%2023.3.1
+      #   # - So we need to remove it
+      #   # Uninstalling Homebrew using the following command recommended in the docs doesn't fail, but doesn't remove everything it should do due to not having sudo permissions:
+      #   # NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/uninstall.sh)"
+      #   # - So we need to use sudo to run it
+      # - name: Uninstall pre-installed Homebrew version
+      #   run: |
+      #     curl -sLO https://raw.githubusercontent.com/Homebrew/install/HEAD/uninstall.sh
+      #     chmod +x ./uninstall.sh
+      #     sudo ./uninstall.sh --force
+      # - name: Remove remaining pre-installed Homebrew directories that weren't removed
+      #   # The Homebrew output tells us that these files possibly related to Homebrew on the GitHub Actions MacOS Runner haven't been deleted, so we should remove them:
+      #   run: |
+      #     sudo rm -rf /usr/local/.com.apple.installer.keep
+      #     sudo rm -rf /usr/local/Frameworks/
+      #     sudo rm -rf /usr/local/Homebrew/
+      #     sudo rm -rf /usr/local/aws-cli/
+      #     sudo rm -rf /usr/local/bin/
+      #     sudo rm -rf /usr/local/etc/
+      #     sudo rm -rf /usr/local/include/
+      #     sudo rm -rf /usr/local/lib/
+      #     sudo rm -rf /usr/local/microsoft/
+      #     sudo rm -rf /usr/local/miniconda/
+      #     sudo rm -rf /usr/local/opt/
+      #     sudo rm -rf /usr/local/sbin/
+      #     sudo rm -rf /usr/local/sessionmanagerplugin/
+      #     sudo rm -rf /usr/local/share/
+      #     sudo rm -rf /usr/local/var/
+      # - name: Ensure reportedly deleted pre-installed Homebrew directories no longer exist
+      #   # The Homebrew output tells us that these should have been deleted, but we should make sure that they are definitely removed:
+      #   run: |
+      #     sudo rm -rf /usr/local/Caskroom
+      #     sudo rm -rf /usr/local/bin/brew
+      # - name: Ensure pre-installed Homebrew version has been removed
+      #   # Check if Homebrew is installed using `command -v brew`. If Homebrew is not already installed, this command will not print anything to standard error or standard output.
+      #   # If Homebrew is already installed (if anything is printed to standard error or standard output), print a message stating that the GitHub Workflow needs to be changed to ensure that Homebrew is not already installed on the macOS virtual machine, and fail the GitHub Workflow.
+      #   run: |
+      #     if command -v brew &> /dev/null
+      #       then echo 'Homebrew is still installed but it should have been removed. Uninstall Homebrew to ensure that the bash script does not try to install Homebrew for a second time.'
+      #       exit 1
+      #     fi
+      # - name: Remove Xcode
+      #   run: sudo rm -rf /Applications/Xcode_14.2.app/
+      # - name: Delete Xcode in '/' directory
+      #   run: sudo rm -rf /Library/Developer/
+      # # Not needed to remove Xcode, will leave in for now in case Xcode misbehaves on GitHub's macOS Virtual Machine. If not, can safely remove:
+      # # - name: Remove other Xcode support files in the Library cache folder
+      # #   run: sudo rm -rf ~/Library/Caches/com.apple.dt.Xcode
+      # - name: Reset the default command-line tools
+      #   run: sudo xcode-select -r
+      # - name: Check that Xcode is not installed
+      #   run: |
+      #     if xcode-select -p ; then
+      #       echo "Xcode is installed but it should have been removed. Uninstall Xcode to ensure that the bash script does not try to install Xcode for a second time."
+      #       exit 1
+      #     fi
+      # - name: Download and run the current branch's version of the bash script
+      #   run: /bin/bash -c "$(curl https://raw.githubusercontent.com/BenRoss92/automate-new-laptop-setup/${{ github.ref_name }}/set-up-laptop.sh)"
