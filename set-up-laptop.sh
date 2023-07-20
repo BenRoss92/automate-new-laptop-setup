@@ -10,11 +10,9 @@ brew help
 xcode-select -p
 
 # Install Homebrew packages
-# TODO: Change - Apparently Slack, Teams and Outlook already come pre-installed on new YouView laptops according to Robin Mace
 brew install --cask slack microsoft-teams microsoft-outlook
 
 # Check that those Homebrew packages are installed
-# TODO: Change - Apparently Slack, Teams and Outlook already come pre-installed on new YouView laptops according to Robin Mace
 brew list slack
 brew list microsoft-teams
 brew list microsoft-outlook
