@@ -60,6 +60,5 @@ jobs:
             echo "Xcode is installed but it should have been removed. Uninstall Xcode to ensure that the bash script does not try to install Xcode for a second time."
             exit 1
           fi
-      - uses: actions/checkout@v3
-      - name: Run bash script
-        run: ./set-up-laptop.sh
+      - name: Download and run the current branch's version of the bash script
+        run: /bin/bash -c "$(curl https://raw.githubusercontent.com/BenRoss92/automate-new-laptop-setup/${{ github.ref_name }}/set-up-laptop.sh)"

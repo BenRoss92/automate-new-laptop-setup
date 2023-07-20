@@ -1,25 +1,35 @@
 # Automate setup of new YouView macOS laptops
 
-## How to run locally
+## How to run
 
-To run the setup steps locally on your machine, run the bash script in the command line:
+To download and run the most up-to-date version of the script in one step without needing to download this repo, run the following in the command line:
 
 ```bash
-./set-up-laptop.sh
+/bin/bash -c "$(curl https://raw.githubusercontent.com/BenRoss92/automate-new-laptop-setup/main/set-up-laptop.sh)"
 ```
 
-## How to run in CI
+Alternatively you can download the repo and run the script in separate steps via the command line:
 
-Run the GitHub Actions in this repo
+1. Clone the repo using Git and `cd` into it, e.g.: `git clone https://github.com/BenRoss92/automate-new-laptop-setup.git && cd automate-new-laptop-setup/`
+2. Run the script: `./set-up-laptop.sh`
 
-### Get notified when a GitHub Actions Workflow run finishes
+## How to test
+
+### Running the script in GitHub Actions
+
+GitHub Actions is used as the CI tool for this repo. When a change is pushed to any branch of the remote repo, a GitHub Actions Workflow is automatically run. This Workflow runs the script from this repo against a macOS virtual machine provided by GitHub Actions, to replicate running the script on a macOS machine. Before the script is run, the Workflow uninstalls some of the pre-installed packages included on the macOS Virtual Machine, to try to replicate a new macOS machine environment as much as possible.
+
+If an error occurs in CI when either running the script or preparing the macOS VM environment, the GitHub Actions Workflow will fail.
+
+### Getting notified when a GitHub Actions run finishes
 
 Instead of staring at a GitHub Actions Workflow run in the GitHub CLI UI or GitHub web UI to know whether a run has finished, you can get notified by doing the following:
 
 Requirements:
 
 * macOS
-* iTerm2
+* [iTerm2](https://iterm2.com/)
+* [GitHub CLI](https://cli.github.com/)
 
 In iTerm, set a mark by pressing: CMD + ALT + A
 
