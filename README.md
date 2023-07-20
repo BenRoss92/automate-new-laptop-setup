@@ -1,12 +1,17 @@
 # Automate setup of new YouView macOS laptops
 
-## How to run locally
+## How to run
 
-To run the setup steps locally on your machine, run the bash script in the command line:
+To download and run the most up-to-date version of the script in one step without needing to download this repo, run the following in the command line:
 
 ```bash
-./set-up-laptop.sh
+/bin/bash -c "$(curl https://raw.githubusercontent.com/BenRoss92/automate-new-laptop-setup/main/set-up-laptop.sh)"
 ```
+
+Alternatively you can download the repo and run the script in separate steps via the command line:
+
+1. Clone the repo using Git and `cd` into it, e.g.: `git clone https://github.com/BenRoss92/automate-new-laptop-setup.git && cd automate-new-laptop-setup/`
+2. Run the script: `./set-up-laptop.sh`
 
 ## How to run in CI
 
