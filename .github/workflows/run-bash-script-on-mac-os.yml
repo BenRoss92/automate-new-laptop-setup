@@ -65,4 +65,4 @@ jobs:
       #   run: ./set-up-laptop.sh
 
       - name: Download and run main branch of bash script
-        run: /bin/bash -c "$(curl https://raw.githubusercontent.com/BenRoss92/automate-new-laptop-setup/main/set-up-laptop.sh)"
+        run: /bin/bash -c "$(curl https://raw.githubusercontent.com/BenRoss92/automate-new-laptop-setup/${{ github.ref_name }}/set-up-laptop.sh)"
