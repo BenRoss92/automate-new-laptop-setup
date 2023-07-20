@@ -4,8 +4,10 @@ jobs:
   Run-Script:
     runs-on: macos-12
     steps:
-      - name: Check if Homebrew package 'hello' is installed (should fail the Workflow)
-        run: brew list hello
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Check if the 'test' bash script running 'brew list hello' fails the Workflow
+        run: ./test.sh
 
       #   # Homebrew is pre-installed on the GitHub Actions MacOS Runner (Virtual Machine) - see: https://github.com/actions/runner-images/blob/main/images/macos/macos-12-Readme.md#:~:text=Composer%202.5.5-,Homebrew%204.0.15,-Miniconda%2023.3.1
       #   # - So we need to remove it
