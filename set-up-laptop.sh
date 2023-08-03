@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 # If any command fails, stop executing subsequent commands and fail the script
 set -e
 
