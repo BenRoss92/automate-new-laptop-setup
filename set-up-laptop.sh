@@ -13,20 +13,17 @@ brew help
 xcode-select -p
 
 # Install Git using Homebrew
-echo "Checking where pre-installed version of Git is installed"
+echo "Checking where pre-installed macOS version of Git is installed"
 which git
 
-echo "Checking if a Homebrew Git version is already installed"
-brew list git
-
-echo "Checking which Homebrew Git versions have already been installed"
-brew ls --versions git
-
-echo "Installing Git using Homebrew"
+echo "Installing newer version of Git using Homebrew"
 brew install git
 
-echo "Checking where new Homebrew Git version is installed"
+echo "Checking Homebrew Git is installed"
+brew list git
+
+echo "Checking where Homebrew Git is installed"
 which git
 
-echo "Checking Git is working - checking version"
+echo "Checking Git is working (check version)"
 git --version
