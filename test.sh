@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Stop executing bash script steps after the first error
+set -e
+
 # This line should fail the GitHub Workflow
 brew list hello
 
