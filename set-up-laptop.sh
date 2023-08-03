@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 # If any command fails, stop executing subsequent commands and fail the script
 set -e
 
@@ -13,10 +12,22 @@ brew help
 # Check Xcode Command Line Tools have been installed by Homebrew
 xcode-select -p
 
-# Install Homebrew packages
-brew install --cask slack microsoft-teams microsoft-outlook
+# Install Git using Homebrew
+echo "Installing newer version of Git using Homebrew"
+brew install git
 
-# Check that those Homebrew packages are installed
-brew list slack
-brew list microsoft-teams
-brew list microsoft-outlook
+echo "Checking Homebrew's Git version is installed"
+brew list git
+
+echo "Checking if Git is using Homebrew's Git version"
+homebrew_git_location="/usr/local/bin/git"
+if [ "$(which git)" = $homebrew_git_location ]
+then
+  echo "Git is correctly using the Homebrew Git version"
+else
+  echo "Git is stored in an expected location. Git may be using the built-in macOS Git version rather than the Git Homebrew version."
+  exit 1
+fi
+
+echo "Checking if Git is working (checking version)"
+git --version
