@@ -1,4 +1,4 @@
-# Automate setup of new macOS laptop
+# Automate new macOS laptop setup
 
 ## What does this repo aim to do?
 
