@@ -1,5 +1,18 @@
 # Automate setup of new YouView macOS laptops
 
+## What does this repo aim to do?
+
+It provides a way to automate setting up a development environment on a brand new macOS laptop.
+
+Only a single terminal command needs to be run. This command downloads a bash script from this repo and runs it in the command line. The bash script contains steps to set up the laptop.
+
+Downloading and running a bash script in one command was inspired by the command for [downloading and installing Homebrew](https://brew.sh/#:~:text=/bin/bash%20%2Dc%20%22%24(curl%20%2DfsSL%20https%3A//raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)%22).
+
+## What does the bash script currently do?
+
+* Installs Homebrew, which also installs the Xcode Command Line Tools, and verifies that both are installed and working correctly
+* Installs Homebrew's version of Git and verifies that it is installed, working correctly and is being used over the pre-installed macOS version of Git
+
 ## How to run
 
 To download and run the most up-to-date version of the script in one step without needing to download this repo, run the following in the command line:
