@@ -1,4 +1,4 @@
-# Automate setup of new YouView macOS laptops
+# Automate setup of new macOS laptop
 
 ## What does this repo aim to do?
 
